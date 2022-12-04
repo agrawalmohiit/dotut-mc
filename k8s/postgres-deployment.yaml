@@ -19,6 +19,12 @@ spec:
       containers:
         - name: postgres
           image: postgres
+          env:
+            - name: POSTRES_PASSWORD # the default postgres image uses this variable by default and overrides the value if POSTRES_PASSWORD is present in env
+              valueFrom:
+                secretKeyRef:
+                  name: pgpassword
+                  key:  PGPASSWORD # k create secret generic pgpassword --from-literal PGPASSWORD=postgres
           ports:
             - containerPort: 5432
           volumeMounts:

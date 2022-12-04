@@ -30,3 +30,8 @@ spec:
               value: "5432"
             - name: PGDATABASE
               value: postgres
+            - name: PGPASSWORD #  - it can be named any which way - it is for the server to use
+              valueFrom:
+                secretKeyRef:
+                  name: pgpassword
+                  key: PGPASSWORD # k create secret generic pgpassword --from-literal PGPASSWORD=postgres | a secret can have multiple keys
